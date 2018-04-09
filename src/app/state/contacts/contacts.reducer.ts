@@ -1,6 +1,6 @@
 import { Contact } from '../../models/contact';
 import { ContactsActionTypes,
-    ContactsActions } from './contacts.actions'
+    ContactsActions } from './contacts.actions';
 
 export interface ContactsState {
   list: Array<Contact>;
@@ -10,7 +10,7 @@ export interface ContactsState {
 const INITIAL_STATE: ContactsState = {
   list: [] /*,
   selectedContactId */
-}
+};
 
 export function contactsReducer(
   state: ContactsState = INITIAL_STATE,
@@ -26,8 +26,8 @@ export function contactsReducer(
         ...state,
         selectedContactId: action.payload };
     case ContactsActionTypes.UPDATE_CONTACT:
-      let updatedList = state.list.map(contact => {
-        return contact.id == action.payload.id
+      const updatedList = state.list.map(contact => {
+        return contact.id === action.payload.id
           ? { ...contact, ...action.payload }
           : contact;
         });

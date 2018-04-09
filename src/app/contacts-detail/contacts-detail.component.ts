@@ -24,13 +24,13 @@ export class ContactsDetailComponent implements OnInit {
   ngOnInit() {
     /*this.contactsService.getContact(this.route.snapshot.paramMap.get('id'))
                         .subscribe(contact => this.contact = contact);*/
-    let contactId = this.route.snapshot.paramMap.get('id');
+    const contactId = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new SelectContactAction(+contactId));
 
     this.contact$ = this.store.select(state => {
-      let id = state.contacts.selectedContactId;
-      let contact = state.contacts.list.find(contact =>
-        contact.id == id);
+      const id = state.contacts.selectedContactId;
+      const contact = state.contacts.list.find(elem =>
+        elem.id === id);
       return contact;
     });
   }

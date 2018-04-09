@@ -1,4 +1,4 @@
-import { contactsReducer, ContactsState } from './contacts/contacts.reducer'
+import { contactsReducer, ContactsState } from './contacts/contacts.reducer';
 import { ActionReducerMap } from '@ngrx/store';
 
 export interface ApplicationState {
@@ -8,4 +8,4 @@ export interface ApplicationState {
 export const ROOT_REDUCER
   : ActionReducerMap<ApplicationState> = {
       contacts: contactsReducer
-}
+};
