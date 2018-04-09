@@ -15,10 +15,11 @@ export function contactsReducer(
     action: ContactsActions) {
     switch (action.type) {
         case ContactsActionTypes.LOAD_CONTACTS_SUCCESS:
-          state = {
+          return {
               ...state,
               list: action.payload
           };
+        default:
+          return state;
     }
-    return state;
 }

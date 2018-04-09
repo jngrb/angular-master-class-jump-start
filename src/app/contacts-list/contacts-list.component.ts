@@ -4,7 +4,7 @@ import { Contact } from '../models/contact';
 import { ContactsService } from '../contacts.service';
 
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../state/app.state';
+import { ApplicationState } from '../state/index';
 import { LoadContactsSuccessAction } from '../state/contacts/contacts.actions';
 
 @Component({
