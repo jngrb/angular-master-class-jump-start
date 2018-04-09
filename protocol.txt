@@ -66,3 +66,6 @@ need rather trivial actions such as (e.g.) 'select contact'
 
 @ngrx/entity:
 - simplifies reducer implementation
+
+Router Guards:
+- canActivate() : Observable<boolean> should be used to delay routing while data is loaded into the store

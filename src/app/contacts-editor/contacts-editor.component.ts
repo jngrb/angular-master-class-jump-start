@@ -27,8 +27,9 @@ export class ContactsEditorComponent implements OnInit {
   ngOnInit() {
     /* this.contactsService.getContact(this.route.snapshot.paramMap.get('id'))
                         .subscribe(contact => this.contact = contact); */
+    /* now handled in the canActivate guard:
     const contactId = this.route.snapshot.paramMap.get('id');
-    this.store.dispatch(new SelectContactAction(+contactId));
+    this.store.dispatch(new SelectContactAction(+contactId));*/
 
     this.contact$ = this.store.select(state => {
       const id = state.contacts.selectedContactId;
@@ -40,7 +41,7 @@ export class ContactsEditorComponent implements OnInit {
        * But do not make the copy here, because it would make the store
        * evalutation pretty slow. Thus, we map the Observable to a copy afterwards. */
       return contact;
-    }).pipe( map( contact => Object.assign({}, contact) ) );
+    }).pipe( map( contact => /*Object.assign({}, contact)*/ ({...contact}) ) );
   }
 
   cancel(contact: Contact) {

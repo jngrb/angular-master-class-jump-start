@@ -24,8 +24,9 @@ export class ContactsDetailComponent implements OnInit {
   ngOnInit() {
     /*this.contactsService.getContact(this.route.snapshot.paramMap.get('id'))
                         .subscribe(contact => this.contact = contact);*/
+    /* now handled in the canActivate guard:
     const contactId = this.route.snapshot.paramMap.get('id');
-    this.store.dispatch(new SelectContactAction(+contactId));
+    this.store.dispatch(new SelectContactAction(+contactId));*/
 
     this.contact$ = this.store.select(state => {
       const id = state.contacts.selectedContactId;

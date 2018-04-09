@@ -4,12 +4,14 @@ import { ContactsActionTypes,
 
 export interface ContactsState {
   list: Array<Contact>;
-  selectedContactId?: number;
+  loaded: boolean;
+  selectedContactId: number;
 }
 
 const INITIAL_STATE: ContactsState = {
-  list: [] /*,
-  selectedContactId */
+  list: [],
+  loaded: false,
+  selectedContactId: null
 };
 
 export function contactsReducer(
@@ -20,11 +22,20 @@ export function contactsReducer(
     case ContactsActionTypes.LOAD_CONTACTS_SUCCESS:
       return {
         ...state,
-        list: action.payload };
+        list: action.payload,
+        loaded: true };
     case ContactsActionTypes.SELECT_CONTACT:
       return {
         ...state,
         selectedContactId: action.payload };
+    case ContactsActionTypes.ADD_CONTACT: {
+      const contact = state.list.find(elem => elem.id === action.payload.id);
+      return {
+        ...state,
+        list: !contact ? [...state.list, action.payload] :
+          state.list
+        };
+    }
     case ContactsActionTypes.UPDATE_CONTACT:
       const updatedList = state.list.map(contact => {
         return contact.id === action.payload.id

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCER } from './state/app.state';
+import { ContactExistsGuard } from './state/contacts/contact.guards';
 
 import { ContactsMaterialModule } from './contacts-material.module';
 
@@ -41,6 +42,7 @@ import { API_ENDPOINT } from './app.tokens';
   ],
   providers: [
     ContactsService,
+    ContactExistsGuard,
     { provide: API_ENDPOINT, useValue: 'http://localhost:4201/api' }
   ],
   bootstrap: [ContactsAppComponent]
