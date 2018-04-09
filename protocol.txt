@@ -22,9 +22,12 @@ state is managed by the store ("single source of truth")
 all UI components subscribe to the store
 
 important:
-put only data in store that is shared
+- put only data in store that is shared
 (redux not necessary for data only relevant for a single component)
 unless the state needs to be persistent (session storage etc.)
+- avoid duplicates in the store
+-> use IDs instead (selectedContactID refers to the index of the contacts list,
+or better, to the unique ID of the contact)
 
 reducer:
 input state is immutable,
@@ -57,3 +60,9 @@ initial state:
 -> every reducer should set its own initial state as default argument
 -> initializes the state when the INIT action is called for every reducer at startup
 -> (using the initialState config argument for the StoreModule import is not prefered)
+
+view-relevant only state is also part of the store
+need rather trivial actions such as (e.g.) 'select contact'
+
+@ngrx/entity:
+- simplifies reducer implementation
