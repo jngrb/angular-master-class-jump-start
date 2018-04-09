@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCER } from './state/app.state';
+
 import { ContactsMaterialModule } from './contacts-material.module';
 
 import { ContactsAppComponent } from './app.component';
@@ -31,6 +34,8 @@ import { API_ENDPOINT } from './app.tokens';
     ContactsMaterialModule,
     FlexLayoutModule,
     RouterModule.forRoot(APP_ROUTES),
+    // initial state is handled in the individual reducer functions
+    StoreModule.forRoot(ROOT_REDUCER, /*{ initialState: ... } */ ),
     HttpClientModule,
     FormsModule
   ],

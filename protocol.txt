@@ -1,0 +1,59 @@
+Angular state management
+
+Topic: *ngrx*
+
+General discussion: state handling
+
+hierachy of dump/smart components (business/view components)
+-> classical input binding
+-> could lead to lots of recursive bindings
+
+sibling components
+-> fetch data from service
+-> shared data from service can lead to inconsistent duplicates
+
+service with subject as shared, emitting data storage
+-> already implemented redux pattern
+
+redux pattern:
+UI dispatches actions
+reducer (pure function) takes state and action and returns next state
+state is managed by the store ("single source of truth")
+all UI components subscribe to the store
+
+important:
+put only data in store that is shared
+(redux not necessary for data only relevant for a single component)
+unless the state needs to be persistent (session storage etc.)
+
+reducer:
+input state is immutable,
+generates a new state object (duplication and modify duplicate) if and if only the state needs to be change
+-> can check for a state change very fast (reference checking)
+-> preferable shallow copy (a deep copy is not necessary) -> use spread operatore
+{
+    ...oldState,
+    changedProperty: {
+        ...oldState.changedProperty,
+        modifiedSubProperty: newValue
+    }
+}
+
+action:
+all reducers are called for every action
+action needs to be unique acroos the application
+
+ngrx: redux pattern for Angular framework using RxJS (Observables)
+-> actions are classes -> strongly typed
+
+type inference:
+-> use string enum for action types
+-> action classes have *readonly* type properties
+-> in the reducer, Typescript can infer payload type
+-> all actions for a reducer are combined into a single (union) type
+-> union type is used in reducer declaration (not the "dump" Action interface)
+
+initial state:
+-> every reducer should set its own initial state as default argument
+-> initializes the state when the INIT action is called for every reducer at startup
+-> (using the initialState config argument for the StoreModule import is not prefered)
