@@ -10,6 +10,7 @@ import { Contact } from '../../models/contact';
 import { ContactsService } from '../../contacts.service';
 import { ApplicationState } from '../app.state';
 import { SelectContactAction, AddContactAction } from './contacts.actions';
+import { ContactsQuery } from './contacts.reducer';
 
 @Injectable()
 export class ContactExistsGuard implements CanActivate {
@@ -32,9 +33,7 @@ export class ContactExistsGuard implements CanActivate {
           map(contact => !!contact) );
     };
 
-    return this.store.select(state => state.contacts.loaded)
-      .pipe(
-        take(1),
-        switchMap(resolveOrAddContactToList) );
+    return this.store.select(ContactsQuery.getLoaded)
+      .pipe( take(1), switchMap(resolveOrAddContactToList) );
   }
 }

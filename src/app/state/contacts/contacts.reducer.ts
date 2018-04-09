@@ -1,3 +1,5 @@
+import { createSelector } from '@ngrx/store';
+
 import { Contact } from '../../models/contact';
 import { ContactsActionTypes,
     ContactsActions } from './contacts.actions';
@@ -13,6 +15,16 @@ const INITIAL_STATE: ContactsState = {
   loaded: false,
   selectedContactId: null
 };
+
+export namespace ContactsQuery {
+  export const getContacts = (state) => state.contacts.list;
+  export const getLoaded   = (state) => state.contacts.loaded;
+  export const getSelectedContactId = (state) => state.contacts.selectedContactId;
+  export const getSelectedContact = createSelector(
+    getContacts,
+    getSelectedContactId,
+    (contacts, id) => contacts.find(contact => contact.id === id) );
+}
 
 export function contactsReducer(
   state: ContactsState = INITIAL_STATE,

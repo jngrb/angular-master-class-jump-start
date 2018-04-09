@@ -4,8 +4,9 @@ import { Contact } from '../models/contact';
 import { ContactsService } from '../contacts.service';
 
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../state/index';
-import { LoadContactsSuccessAction } from '../state/contacts/contacts.actions';
+import { ApplicationState, ContactsQuery,
+  LoadContactsSuccessAction } from '../state';
+import {  } from '../state/contacts/contacts.actions';
 
 @Component({
   selector: 'trm-contacts-list',
@@ -21,8 +22,7 @@ export class ContactsListComponent implements OnInit {
 
   ngOnInit () {
     // this.contacts$ = this.contactsService.getContacts();
-    const query = (state) => state.contacts.list;
-    this.contacts$ = this.store.select(query);
+    this.contacts$ = this.store.select(ContactsQuery.getContacts);
 
     this.contactsService.getContacts()
       .subscribe(contacts => {

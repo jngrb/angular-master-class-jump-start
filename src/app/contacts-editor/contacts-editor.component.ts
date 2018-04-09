@@ -7,8 +7,9 @@ import { ContactsService } from '../contacts.service';
 import { map } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
-import { ApplicationState } from '../state/index';
-import { SelectContactAction, UpdateContactAction } from '../state/contacts/contacts.actions';
+import { ApplicationState,
+  SelectContactAction, UpdateContactAction,
+  ContactsQuery } from '../state';
 
 @Component({
   selector: 'trm-contacts-editor',
@@ -31,17 +32,8 @@ export class ContactsEditorComponent implements OnInit {
     const contactId = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new SelectContactAction(+contactId));*/
 
-    this.contact$ = this.store.select(state => {
-      const id = state.contacts.selectedContactId;
-      const contact = state.contacts.list.find(elem =>
-        elem.id === id);
-      /* Attention: store state should be immutable!
-       * The ngModel in the form template implements two-way data binding
-       * and thus the returned object must be a deep copy!
-       * But do not make the copy here, because it would make the store
-       * evalutation pretty slow. Thus, we map the Observable to a copy afterwards. */
-      return contact;
-    }).pipe( map( contact => /*Object.assign({}, contact)*/ ({...contact}) ) );
+    this.contact$ = this.store.select(ContactsQuery.getSelectedContact)
+      .pipe( map( contact => ({...contact}) ) );
   }
 
   cancel(contact: Contact) {

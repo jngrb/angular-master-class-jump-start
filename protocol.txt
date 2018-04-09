@@ -69,3 +69,14 @@ need rather trivial actions such as (e.g.) 'select contact'
 
 Router Guards:
 - canActivate() : Observable<boolean> should be used to delay routing while data is loaded into the store
+
+Middleware:
+- use ngrx-store-freeze to ensure that no-one is manipulating the store's state in development mode
+- Redux DevTools (@ngrx/store-devtools) to explore state changes and time travel
+-> see the last 5 (or so) actions (live in-action!)
+-> plus Chrome Extension!
+
+effects:
+-> asynchronious state manipulation (centralize loading the data)
+-> ofType instead of switch case because we select the relevant action from the stream of actions
+-> then map to action that saves the data after loading it

@@ -6,7 +6,7 @@ import { Contact } from '../models/contact';
 
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../state/index';
-import { SelectContactAction } from '../state/contacts/contacts.actions';
+import { ContactsQuery, SelectContactAction } from '../state';
 
 @Component({
   selector: 'trm-contacts-detail',
@@ -28,11 +28,6 @@ export class ContactsDetailComponent implements OnInit {
     const contactId = this.route.snapshot.paramMap.get('id');
     this.store.dispatch(new SelectContactAction(+contactId));*/
 
-    this.contact$ = this.store.select(state => {
-      const id = state.contacts.selectedContactId;
-      const contact = state.contacts.list.find(elem =>
-        elem.id === id);
-      return contact;
-    });
+    this.contact$ = this.store.select(ContactsQuery.getSelectedContact);
   }
 }
