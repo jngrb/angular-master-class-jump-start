@@ -1,11 +1,23 @@
 import { ContactsActionTypes, ContactsActions,
-  LoadContactsSuccessAction, SelectContactAction,
-  AddContactAction, UpdateContactAction } from './contacts/contacts.actions';
+  LoadContactsAction, LoadContactsSuccessAction,
+  SelectContactAction, AddContactAction,
+  UpdateContactAction, UpdateContactSuccessAction } from './contacts/contacts.actions';
 import { ContactsState, ContactsQuery } from './contacts/contacts.reducer';
-import { ApplicationState } from './app.state';
+import { ContactExistsGuard } from './contacts/contact.guards';
+import { ROOT_REDUCER, ApplicationState } from './app.state';
+
+import { storeFreeze } from 'ngrx-store-freeze';
+import { environment } from '../../environments/environment';
+
+const META_REDUCERS = !environment.production
+  ? [storeFreeze]
+  : [];
 
 export { ContactsActionTypes, ContactsActions,
-  LoadContactsSuccessAction, SelectContactAction,
-  AddContactAction, UpdateContactAction,
+  LoadContactsAction, LoadContactsSuccessAction,
+  SelectContactAction, AddContactAction,
+  UpdateContactAction, UpdateContactSuccessAction,
   ContactsState, ContactsQuery,
-  ApplicationState };
+  ContactExistsGuard,
+  ROOT_REDUCER, ApplicationState,
+  META_REDUCERS };

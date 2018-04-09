@@ -48,7 +48,7 @@ export function contactsReducer(
           state.list
         };
     }
-    case ContactsActionTypes.UPDATE_CONTACT:
+    case ContactsActionTypes.UPDATE_CONTACT_SUCCESS:
       const updatedList = state.list.map(contact => {
         return contact.id === action.payload.id
           ? { ...contact, ...action.payload }

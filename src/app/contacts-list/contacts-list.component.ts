@@ -5,7 +5,7 @@ import { ContactsService } from '../contacts.service';
 
 import { Store } from '@ngrx/store';
 import { ApplicationState, ContactsQuery,
-  LoadContactsSuccessAction } from '../state';
+  LoadContactsAction, LoadContactsSuccessAction } from '../state';
 import {  } from '../state/contacts/contacts.actions';
 
 @Component({
@@ -24,11 +24,7 @@ export class ContactsListComponent implements OnInit {
     // this.contacts$ = this.contactsService.getContacts();
     this.contacts$ = this.store.select(ContactsQuery.getContacts);
 
-    this.contactsService.getContacts()
-      .subscribe(contacts => {
-        this.store.dispatch(
-          new LoadContactsSuccessAction(contacts) );
-      });
+    this.store.dispatch(new LoadContactsAction());
   }
 
   trackByContactId(index, contact) {
