@@ -16,3 +16,8 @@ spy functions:
 - spyOn(contactsService, 'getContacts').and.returnValue(of(CONTACTS_DATA))
 - mocking (warning, then the asynchronous 'http' observable will be a synchronous 'of' one)
 - and check that a function has been called expect(contactsService.getContacts).toHaveBeenCalled()
+
+http mocking:
+- build "chain" of epected calls
+- flush with mocked reponses (synchronous!)
+- verify that expectation queues are empty
