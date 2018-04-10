@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, inject, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { delay } from 'rxjs/operators';
 
 import { API_ENDPOINT } from './app.tokens';
 
@@ -25,13 +27,21 @@ describe('ContactsService', () => {
       ]
     });
 
-    service = TestBed.get(ContactsService);
+    // alternative DI resolution: service = TestBed.get(ContactsService);
+    /* get the dependency resolution from the scope of a component:
+     * fixture.debugElement.injector.get(DependencyToken) */
   });
 
+  beforeEach(inject([ContactsService], contactsService => {
+    service = contactsService;
+  }));
+
   it('should provide all contacts - sync test', () => {
-    service.getContacts().subscribe( results => {
-      expect(results.length).toBeGreaterThan(0);
-    });
+    service.getContacts().pipe( delay( 100 ) )
+      .subscribe( results => {
+        expect(results.length).toBe(0); // will not fail because the delay prevent evaluation
+        expect(results.length).toBeGreaterThan(0);
+      });
 
     const TEST_ID = '2';
     service.getContact(TEST_ID).subscribe( result => {

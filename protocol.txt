@@ -1,0 +1,18 @@
+Testing:
+
+jasming testing for errors:
+- expect(() => {...}).toThrow() needs a callable function
+- force single it runs using fit instead of it
+
+angular unit tests:
+- simple DI resolutions with TestBed.get
+- get the dependency resolution from the scope of a component:
+     * fixture.debugElement.injector.get(DependencyToken)
+- without async: expect in async calls (Promise.then, Observable.subscribe) might not be resolved
+- alternative to asnyc: it('text', (done) => { ...; done(); });
+  -> wait with test completion until done is called
+
+spy functions:
+- spyOn(contactsService, 'getContacts').and.returnValue(of(CONTACTS_DATA))
+- mocking (warning, then the asynchronous 'http' observable will be a synchronous 'of' one)
+- and check that a function has been called expect(contactsService.getContacts).toHaveBeenCalled()
