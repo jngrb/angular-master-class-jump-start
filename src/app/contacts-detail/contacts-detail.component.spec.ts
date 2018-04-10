@@ -42,13 +42,22 @@ describe('ContactsDetailComponent', () => {
 
     expect(debugEl.nativeElement.textContent)
       .toContain(testContact.name);
-  });
+
+    testContact.name = 'Edgar Wallace';
+    fixture.detectChanges();
+
+    expect(debugEl.nativeElement.textContent)
+      .toContain(testContact.name);
+      expect(debugEl.nativeElement.textContent)
+      .toContain('Edgar Wallace');
+    });
 
   it('should emit back event', () => {
     let backEmitted = false;
-    const buttonEl = fixture.debugElement.query(
-      By.css('#backBtn')
-    );
+    const buttonEl = fixture.debugElement.queryAll(
+      // By.css('#backBtn')
+      By.css('[mat-button]')
+    )[1];
 
     component.back.subscribe(() => {
       backEmitted = true;
