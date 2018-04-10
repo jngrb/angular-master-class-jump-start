@@ -15,9 +15,14 @@ describe( 'ContactManager', () => {
     expect(contactManager.getAll()).toEqual(CONTACT_DATA);
   });
 
-  it('should return a single contact', () => {
+  it('should return a single contact - method I', () => {
     const id = 1;
     expect(contactManager.get(id).id).toBe(id);
+  });
+
+  it('should return a single contact - method II', () => {
+    const existingContact = CONTACT_DATA[2];
+    expect(contactManager.get(existingContact.id)).toEqual(existingContact);
   });
 
   it('should return null for an invalid ID', () => {
@@ -79,6 +84,8 @@ describe( 'ContactManager', () => {
       contactToBeUpdated.name = 'Changed Name';
       contactManager.update(contactToBeUpdated);
       expect(contactManager.contacts[2]).toEqual(contactToBeUpdated);
+
+      expect(contactManager.get(+contactToBeUpdated.id)).toEqual(contactToBeUpdated);
     });
   });
 });
