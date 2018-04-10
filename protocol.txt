@@ -21,3 +21,8 @@ http mocking:
 - build "chain" of epected calls
 - flush with mocked reponses (synchronous!)
 - verify that expectation queues are empty
+
+shallow tests:
+- do not render child components
+- configure test bed with schema: NO_ERRORS_SCHEMA
+- e.g. skip material components, just test the one component and its logic
