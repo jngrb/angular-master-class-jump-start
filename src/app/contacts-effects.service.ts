@@ -39,6 +39,6 @@ export class ContactsEffectsService {
       switchMap( (contact: Contact) =>
         this.contactsService.updateContact(contact) ),
       tap( (contact: Contact) => this.router.navigate(['/contact', contact.id]) ),
-      map((contact: Contact) => new UpdateContactSuccessAction(contact) )
+      map( (contact: Contact) => new UpdateContactSuccessAction(contact) )
    );
 }

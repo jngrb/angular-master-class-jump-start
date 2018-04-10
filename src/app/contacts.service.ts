@@ -7,9 +7,13 @@ import { API_ENDPOINT } from './app.tokens';
 
 import { Contact } from './models/contact';
 
-interface ContactResponse  { item: Contact };
-interface ContactsResponse { items: Contact[] };
+interface ContactResponse  {
+  item: Contact;
+}
 
+interface ContactsResponse {
+  items: Contact[];
+}
 
 @Injectable()
 export class ContactsService {

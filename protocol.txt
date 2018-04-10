@@ -80,3 +80,6 @@ effects:
 -> asynchronious state manipulation (centralize loading the data)
 -> ofType instead of switch case because we select the relevant action from the stream of actions
 -> then map to action that saves the data after loading it
+
+npm module bundling:
+-> ng-packagr (will be supported by Angular/CLI soon)!
