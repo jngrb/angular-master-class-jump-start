@@ -17,7 +17,7 @@ export class ContactManager {
   }
 
   update(contact: Contact) {
-    let index = this._contacts.findIndex(c => c.id == contact.id);
+    const index = this._contacts.findIndex(c => c.id === contact.id);
     if (index === -1) {
       throw new Error(`Trying to update contact that doesn't exist with ID: ${contact.id}!`);
     }
@@ -25,7 +25,7 @@ export class ContactManager {
   }
 
   get(id: number) {
-    let contact = this.contacts.find(c => c.id === id);
+    const contact = this.contacts.find(c => c.id === id);
     return contact ? contact : null;
   }
 
