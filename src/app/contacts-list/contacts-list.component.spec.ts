@@ -28,7 +28,7 @@ describe('ContactsDetailComponent', () => {
       declarations: [ContactsListComponent],
       imports: [
         ContactsMaterialModule,
-        RouterTestingModule,
+        RouterTestingModule, // because routerLink is used, and the real router does not work when testing
         HttpClientModule
       ],
       providers: [
@@ -49,6 +49,7 @@ describe('ContactsDetailComponent', () => {
 
   it('should fetch and display contacts', () => {
 
+    // mocking with a synchronous observable
     spyOn(contactsService, 'getContacts').and.returnValue(of(testContacts));
 
     fixture.detectChanges(); // call ngOnInit and do all the change detection and view updating
@@ -57,5 +58,8 @@ describe('ContactsDetailComponent', () => {
 
     expect(contactsService.getContacts).toHaveBeenCalled();
     expect(viewItems.length).toEqual(testContacts.length);
+    expect(viewItems[0].nativeElement.textContent).toEqual(testContacts[0].name);
+    expect(viewItems[1].nativeElement.textContent).toEqual(testContacts[1].name);
+    expect(viewItems[2].nativeElement.textContent).toEqual(testContacts[2].name);
   });
 });
